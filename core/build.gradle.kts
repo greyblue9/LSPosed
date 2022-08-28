@@ -106,9 +106,11 @@ android {
     }
 
     buildTypes {
+        debug {
+            isMinifyEnabled = false
+        }
         release {
-            isMinifyEnabled = true
-            proguardFiles("proguard-rules.pro")
+            isMinifyEnabled = false
         }
     }
     externalNativeBuild {
