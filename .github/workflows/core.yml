@@ -12,14 +12,19 @@ jobs:
 
     steps:
     - name: Environment
+      env:
+        CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
+        BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+        COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+        COMMIT_URL: ${{ github.event.head_commit.url }}
+        CHECK_SUITE_ID: ${{ github.event.check_suite.id }}
+        CHECK_SUITE_NODE_ID: ${{ github.event.check_suite.node_id }}
+        CHECK_SUITE_NODE_SHA: ${{ github.event.check_suite.node_sha }}
+        CHECK_SUITE_URL: ${{ github.event.check_suite.url }}
+        CHECK_SUITE_HEAD_SHA: ${{ github.event.check_suite.head_sha }}
+        CHECK_SUITE_HEAD_BRANCH: ${{ github.event.check_suite.head_branch }}
+        CHECK_SUITE_APP_NAME: ${{ github.event.check_suite.app.name }}
       run: |
-        export CHECK_SUITE_ID="$( echo -E "${{ github.event.check_suite.id }}" )"
-        export CHECK_SUITE_NODE_ID="$( echo -E "${{ github.event.check_suite.node_id }}" )"
-        export CHECK_SUITE_NODE_SHA="$( echo -E "${{ github.event.check_suite.node_sha }}" )"
-        export CHECK_SUITE_URL="$( echo -E "${{ github.event.check_suite.url }}" )"
-        export CHECK_SUITE_HEAD_SHA="$( echo -E "${{ github.event.check_suite.head_sha }}" )"
-        export CHECK_SUITE_HEAD_BRANCH="$( echo -E "${{ github.event.check_suite.head_branch }}" )"
-        export CHECK_SUITE_APP_NAME="$( echo -E "${{ github.event.check_suite.app.name }}" )"
         typeset -p -a
         typeset -p -x
         typeset -p
