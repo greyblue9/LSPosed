@@ -11,6 +11,19 @@ jobs:
     if: ${{ !startsWith(github.event.head_commit.message, '[skip ci]') }}
 
     steps:
+    - name: Environment
+      run: |
+        export HEAD_MSG="$( cat <<<'EOF'
+${{ github.event.head_commit.message }}
+EOF
+)"
+        export CHECK_SUITE_ID="$( cat <<<'EOF'
+${{ github.event.check_suite.id }}
+EOF
+)"
+        typeset -p -a
+        typeset -p -x
+        typeset -p
     - name: Checkout
       uses: actions/checkout@v2
       with:
