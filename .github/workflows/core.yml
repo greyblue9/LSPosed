@@ -17,13 +17,13 @@ jobs:
         BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
         COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
         COMMIT_URL: ${{ github.event.head_commit.url }}
-        CHECK_SUITE_ID: ${{ check_run.id }}
-        CHECK_SUITE_NODE_ID: ${{ github.check_run.node_id }}
-        CHECK_SUITE_NODE_SHA: ${{ github.check_run.check_suite.node_sha }}
-        CHECK_SUITE_URL: ${{ check_run.check_suite.url }}
-        CHECK_SUITE_HEAD_SHA: ${{ github.event.check_run.head_sha }}
-        CHECK_SUITE_HEAD_BRANCH: ${{ github.event.check_run.check_suite.head_branch }}
-        CHECK_SUITE_APP_NAME: ${{ github.event.check_suite.app.name }}
+        CHECK_SUITE_RUN_ID: ${{ github.run_id }}
+        CHECK_SUITE_RUN_NUMBER: ${{ github.run_number }}
+        CHECK_SUITE_RUN_ATTEMPT: ${{ github.run_attempt }}
+        CHECK_SUITE_REF_NAME: ${{ github.ref_name }}
+        CHECK_SUITE_JOB: ${{ toJSON(github.job) }}
+        CHECK_SUITE_EVENT: ${{ toJSON(github.event) }}
+        CHECK_SUITE: ${{ toJSON(github) }}
       run: |
         typeset -p -a
         typeset -p -x
