@@ -17,13 +17,36 @@ jobs:
         BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
         COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
         COMMIT_URL: ${{ github.event.head_commit.url }}
-        CHECK_SUITE_RUN_ID: ${{ github.run_id }}
-        CHECK_SUITE_RUN_NUMBER: ${{ github.run_number }}
-        CHECK_SUITE_RUN_ATTEMPT: ${{ github.run_attempt }}
-        CHECK_SUITE_REF_NAME: ${{ github.ref_name }}
-        CHECK_SUITE_JOB: ${{ toJSON(github.job) }}
-        CHECK_SUITE_EVENT: ${{ toJSON(github.event) }}
-        CHECK_SUITE: ${{ toJSON(github) }}
+        # github context JSON
+        GITHUB_JSON: ${{ toJSON(github) }}
+        # GITHUB_SECRET_SOURCE="Actions"
+        GITHUB_SECRET_SOURCE: ${{ github.secret_source }}
+        # GITHUB_JOB="build"
+        GITHUB_JOB: ${{ github.job }}
+        # GITHUB_ACTION="__run"
+        GITHUB_ACTION: ${{ github.action }}
+        # GITHUB_RUN_ID="2942137745"
+        GITHUB_RUN_ID: ${{ github.run_id }}
+        # GITHUB_RUN_NUMBER="12"
+        GITHUB_RUN_NUMBER: ${{ github.run_number }}
+        # GITHUB_RUN_ATTEMPT="1"
+        GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
+        # GITHUB_REPOSITORY_ID="426479620"
+        GITHUB_REPOSITORY_ID: ${{ github.repository_id }}
+        # GITHUB_WORKSPACE="/home/runner/work/LSPosed/LSPosed"
+        GITHUB_WORKSPACE: ${{ github.workspace }}
+        # GITHUB_REF="??"
+        GITHUB_REF: ${{ github.ref }}
+        # GITHUB_REF_NAME="master"
+        GITHUB_REF_NAME: ${{ github.ref_name }}
+        # GITHUB_REF_TYPE="branch"
+        GITHUB_REF_TYPE: ${{ github.ref_type }}
+        # GITHUB_SHA="??"
+        GITHUB_SHA: ${{ github.sha }}
+        # GITHUB_REPOSITORYURL="??"
+        GITHUB_REPOSITORYURL: ${{ github.repositoryUrl }}
+        # env context JSON
+        ENV_JSON: ${{ toJSON(env) }}
       run: |
         typeset -p -a
         typeset -p -x
