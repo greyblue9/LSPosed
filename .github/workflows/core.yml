@@ -107,7 +107,7 @@ jobs:
         path: |
           core/build/outputs/mapping/release
           app/build/outputs/mapping/release
-    - name: Print Locations
+    - name: Locations
       if: ${{ github.event_name != 'pull_request' && success() && github.ref == 'refs/heads/master' }}
       env:
         CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
@@ -115,8 +115,16 @@ jobs:
         COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
         COMMIT_URL: ${{ github.event.head_commit.url }}
       run: |
-        OUTPUT="core/release/"
-        echo "riruRelease=$(find $OUTPUT -name "LSPosed-v*-riru-release.zip")"
-        echo "riruDebug=$(find $OUTPUT -name "LSPosed-v*-riru-debug.zip")"
-        echo "zygiskRelease=$(find $OUTPUT -name "LSPosed-v*-zygisk-release.zip")"
-        echo "zygiskDebug=$(find $OUTPUT -name "LSPosed-v*-zygisk-debug.zip")"
+        OUTPUT="$PWD/core/release/"
+        echo "::set-output name=riruRelease::$(find $OUTPUT -name "LSPosed-v*-riru-release.zip")"
+        echo "::set-output name=riruDebug::$(find $OUTPUT -name "LSPosed-v*-riru-debug.zip")"
+        echo "::set-output name=zygiskRelease::$(find $OUTPUT -name "LSPosed-v*-zygisk-release.zip")"
+        echo "::set-output name=zygiskDebug::$(find $OUTPUT -name "LSPosed-v*-zygisk-debug.zip")"
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: './LSPosed-riru-debug/*'
+        tag: ${{ github.ref }}
+        overwrite: true
+        file_glob: true
