@@ -13,14 +13,13 @@ jobs:
     steps:
     - name: Environment
       run: |
-        export HEAD_MSG="$( cat <<<'EOF'
-        ${{ github.event.head_commit.message }}
-        EOF
-        )"
-        export CHECK_SUITE_ID="$( cat <<<'EOF'
-        ${{ github.event.check_suite.id }}
-        EOF
-        )"
+        export CHECK_SUITE_ID="$( echo -E "${{ github.event.check_suite.id }}" )"
+        export CHECK_SUITE_NODE_ID="$( echo -E "${{ github.event.check_suite.node_id }}" )"
+        export CHECK_SUITE_NODE_SHA="$( echo -E "${{ github.event.check_suite.node_sha }}" )"
+        export CHECK_SUITE_URL="$( echo -E "${{ github.event.check_suite.url }}" )"
+        export CHECK_SUITE_HEAD_SHA="$( echo -E "${{ github.event.check_suite.head_sha }}" )"
+        export CHECK_SUITE_HEAD_BRANCH="$( echo -E "${{ github.event.check_suite.head_branch }}" )"
+        export CHECK_SUITE_APP_NAME="$( echo -E "${{ github.event.check_suite.app.name }}" )"
         typeset -p -a
         typeset -p -x
         typeset -p
