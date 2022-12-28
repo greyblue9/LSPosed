@@ -124,7 +124,7 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: ${{ steps.Locations.riruDebug }}
+        file: './LSPosed-riru-debug/*'
         tag: ${{ github.ref }}
         overwrite: true
-        file_glob: false
+        file_glob: true
